@@ -1,0 +1,16 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore database files
+*.sqlite3
+
+# Ignore logs and environment files
+*.log
+logs/
+.env
