@@ -1,0 +1,19 @@
+name: Deploy Backend
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 87.106.67.244 >> ~/.ssh/known_hosts
+
+      - name: Deploy to Fasthosts
+        run: |
+          ssh root@87.106.67.244 "cd Taskify/backend && git pull && source venv/bin/activate && pm2 restart taskify-backend"
