@@ -3,25 +3,25 @@ version: '3.8'
 services:
   db:
     image: postgres:15
-    container_name: taskify_postgres
+    container_name: movie_db
     restart: always
     environment:
-      POSTGRES_USER: taskify_user
+      POSTGRES_USER: movie_user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: taskify
+      POSTGRES_DB: moviedb
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend  # ✅ Fixed Path
-    container_name: taskify_backend
+    build: ./backend
+    container_name: movie_backend
     restart: always
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://taskify_user:password@db:5432/taskify
+      DATABASE_URL: postgresql://movie_user:password@db:5432/moviedb
     ports:
       - "8000:8000"
     volumes:

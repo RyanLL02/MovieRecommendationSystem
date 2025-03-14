@@ -14,5 +14,7 @@ class Base(DeclarativeBase):
     pass
 
 def init_db():
-    from models import Task  # Import models to be created
-    Base.metadata.create_all(engine)  # Creates tables if they don't exist
+    from models.user import User
+    from models.movie import Movie
+    from models.rating import Rating
+    Base.metadata.create_all(engine)
